@@ -7,7 +7,7 @@ JavaScript, React, D3, Bootstrap, CSS
 
 # User Flow
 
-![Alt tag](http://g.recordit.co/BcH0spTaYM.gif)
+![Alt tag](http://g.recordit.co/ozPdAYmlln.gif)
 User selects a risk profile - a number from 1 - 10. 
 User then inputs details regarding his/her current portfolio standings. This is a breakdown of 5 asset categories: 
  
