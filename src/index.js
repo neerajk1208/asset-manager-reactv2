@@ -2,13 +2,31 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var rd3 = require('react-d3');
 
-var PieChart = rd3.PieChart;
+//Above are the dependencies required to render React components. 
+//The dependencies also includes react-d3, which is the source of the pie chart. 
 
-var pieData = [
-  {label: 'A', value: 10}, 
-  {label: 'B', value: 15}, 
-  {label: 'C', value: 20}
-]
+
+//AssetManager is the main container class for this application. 
+//I've initialize an initial state which includes the following: 
+
+  //Risk
+  //Expected asset allocation - data associated with the graph
+  //actual assets - $ value for each asset
+
+//handleChange calls setState to update the risk and expected asset allocation
+//handleUpdate called setState to update the actual asset allocation
+//handleSubmit generates insights by doing the following
+  //tabulating total money allocated in assets
+  //generating actual percentages by comparing money allocated to total allocation
+  //compare actual to expected percentages to generate insights
+  //included a 5% buffer so that insights aren't rendered for minor differences
+  //5% is arbitrary and can be easily modified upon application accuracy needs
+
+
+//ListofInsights is a nested component which refers to the state provided from AssetManager
+//List of Insights renders by mapping out the data of insights, which is included as a key/value pair in the state object
+//When there are no insights, ListofInsights maps out an empty array, so nothing renders
+
 
 var AssetManager = React.createClass({
         getInitialState: function() {
@@ -176,6 +194,7 @@ var AssetManager = React.createClass({
         }
       });
 
+//Including chart component to modularize code in next iteration
       var Chart = React.createClass({
         render: function() {
           return (
@@ -187,6 +206,7 @@ var AssetManager = React.createClass({
         }
       });
 
+//Including portfolio component to modularize code in next iteration
       var Portfolio = React.createClass({
         render: function() {
           return (
@@ -221,7 +241,15 @@ var AssetManager = React.createClass({
           );
         }
       });
-      
+
+//Options is the props associated with the application with preset allocations paired with possible risks from 1 - 10
+//Options is ordered by the following assets
+  //1. Bonds
+  //2. Stocks
+  //3. ETFs
+  //4. Real Estate
+  //5. Cash
+
       var options = {
         possibilities: {
           1: [10, 0, 0, 0, 90],
@@ -237,7 +265,10 @@ var AssetManager = React.createClass({
         },
         insights: []
       }
+
+      //Here, I am instantiating the AssetManager and linking the options object to it
       var element = React.createElement(AssetManager, options);
 
-
+//The virtual DOM renders the AssetManager within the body of the HTML page
+//Associated nested components render as well. 
 ReactDOM.render(element, document.body);
